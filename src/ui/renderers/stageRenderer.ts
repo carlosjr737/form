@@ -41,7 +41,7 @@ export class StageRenderer {
     
     if (this.appState.formacaoAtivaId !== formacao.id) {
       this.appState.setFormacaoAtiva(formacao.id);
-      // TODO: Trigger sidebar re-render
+      // TODO: Trigger sidebar re-render via callback
     }
     this.renderizarPalco();
   }
@@ -58,27 +58,27 @@ export class StageRenderer {
 
     div.addEventListener('dblclick', (e) => {
       e.preventDefault();
-      // TODO: Check if playing
+      // TODO: Check if playing via PlaybackManager
       const novo = prompt('Novo nome do bailarino:', marcador.rotulo);
       if (novo !== null) {
         const nome = novo.trim();
         if (nome.length) {
-          // TODO: Implementar renomeação
+          // TODO: Implementar renomeação via callback
         }
       }
     });
 
     div.addEventListener('contextmenu', (e) => {
       e.preventDefault();
-      // TODO: Check if playing
+      // TODO: Check if playing via PlaybackManager
       if (confirm(`Remover o bailarino ${marcador.rotulo}?`)) {
-        // TODO: Implementar remoção
+        // TODO: Implementar remoção via callback
       }
     });
 
     div.addEventListener('mousedown', (e) => {
       e.preventDefault();
-      // TODO: Check if playing
+      // TODO: Check if playing via PlaybackManager
       
       const startRect = div.getBoundingClientRect();
       const palcoRect = this.dom.palcoEl.getBoundingClientRect();

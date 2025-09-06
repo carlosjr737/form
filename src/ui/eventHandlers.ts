@@ -60,25 +60,25 @@ export class EventHandlers {
     this.dom.btnAnterior.addEventListener('click', () => {
       const i = this.appState.db.formacoes.findIndex(f => f.id === this.appState.formacaoAtivaId);
       if (i > 0) {
-        // TODO: Implementar mudança de formação
+        // TODO: Implementar mudança de formação via callback
       }
     });
 
     this.dom.btnProxima.addEventListener('click', () => {
       const i = this.appState.db.formacoes.findIndex(f => f.id === this.appState.formacaoAtivaId);
       if (i < this.appState.db.formacoes.length - 1) {
-        // TODO: Implementar mudança de formação
+        // TODO: Implementar mudança de formação via callback
       }
     });
   }
 
   private setupNavigationEvents(): void {
     this.dom.btnAddFormacao.addEventListener('click', () => {
-      // TODO: Implementar adição de formação
+      // TODO: Implementar adição de formação via callback
     });
 
     this.dom.btnAddBailarino.addEventListener('click', () => {
-      // TODO: Implementar adição de bailarino
+      // TODO: Implementar adição de bailarino via callback
     });
   }
 
@@ -128,12 +128,12 @@ export class EventHandlers {
       } else if (e.key === 'ArrowLeft') {
         const i = this.appState.db.formacoes.findIndex(f => f.id === this.appState.formacaoAtivaId);
         if (i > 0) {
-          // TODO: Implementar navegação
+          // TODO: Implementar navegação via callback
         }
       } else if (e.key === 'ArrowRight') {
         const i = this.appState.db.formacoes.findIndex(f => f.id === this.appState.formacaoAtivaId);
         if (i < this.appState.db.formacoes.length - 1) {
-          // TODO: Implementar navegação
+          // TODO: Implementar navegação via callback
         }
       }
     });
@@ -145,7 +145,7 @@ export class EventHandlers {
       this.timelineRenderer.renderizarFaixaAudio();
     });
 
-    // TODO: Implementar scrubbing events
+    // TODO: Implementar scrubbing events via TimelineRenderer
   }
 
   private setupSearchEvents(): void {

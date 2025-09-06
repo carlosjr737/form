@@ -175,7 +175,7 @@ export class TimelineRenderer {
   }
 
   private editarTemposFormacao(f: any): void {
-    // TODO: Implementar pausa do playback
+    // TODO: Implementar pausa do playback via PlaybackManager
     const nd = prompt(`Editar DURAÇÃO (s) para "${f.nome}":`, f.duracaoSegundos);
     if (nd !== null && !isNaN(Number(nd)) && Number(nd) >= 0) {
       f.duracaoSegundos = parseFloat(nd);
@@ -186,7 +186,7 @@ export class TimelineRenderer {
       f.tempoTransicaoEntradaSegundos = parseFloat(nt);
     }
     
-    // TODO: Re-render tudo
+    // TODO: Re-render tudo via callback
   }
 
   private adicionarSubBlocoTransicao(bloco: HTMLElement, f: any, tempoTotalDoBloco: number): void {
@@ -201,7 +201,42 @@ export class TimelineRenderer {
     handleSplit.className = 'handle handle-split';
     handleSplit.title = 'Arraste para ajustar transição';
     
-    // TODO: Implementar drag handler
+    handleSplit.addEventListener('mousedown', (e) => {
+      e.stopPropagation();
+      e.preventDefault();
+      // TODO: Implementar pausa do playback
+      
+      const blocoRect = bloco.getBoundingClientRect();
+      const startX = e.clientX;
+      const transIni = f.tempoTransicaoEntradaSegundos;
+      const totalBloco = f.tempoTransicaoEntradaSegundos + f.duracaoSegundos;
+      
+      const onMove = (ev: MouseEvent) => {
+        const dx = ev.clientX - startX;
+        const secPerPx = totalBloco / (blocoRect.width || 1);
+        let novaTrans = transIni + dx * secPerPx;
+        const minDur = 0.1;
+        novaTrans = Math.max(0, Math.min(totalBloco - minDur, novaTrans));
+        sub.style.width = `${(novaTrans / totalBloco) * 100}%`;
+        sub.title = `Transição: ${novaTrans.toFixed(2)}s`;
+      };
+      
+      const onUp = (ev: MouseEvent) => {
+        const dx = ev.clientX - startX;
+        const secPerPx = totalBloco / (blocoRect.width || 1);
+        let novaTrans = transIni + dx * secPerPx;
+        const minDur = 0.1;
+        novaTrans = Math.max(0, Math.min(totalBloco - minDur, novaTrans));
+        f.tempoTransicaoEntradaSegundos = +novaTrans.toFixed(2);
+        f.duracaoSegundos = +(totalBloco - novaTrans).toFixed(2);
+        document.removeEventListener('mousemove', onMove);
+        document.removeEventListener('mouseup', onUp);
+        // TODO: Re-render tudo
+      };
+      
+      document.addEventListener('mousemove', onMove);
+      document.addEventListener('mouseup', onUp);
+    });
     
     sub.appendChild(handleSplit);
     bloco.appendChild(sub);
@@ -212,7 +247,38 @@ export class TimelineRenderer {
     handleEnd.className = 'handle handle-end';
     handleEnd.title = 'Arraste para ajustar duração';
     
-    // TODO: Implementar drag handler
+    handleEnd.addEventListener('mousedown', (e) => {
+      e.stopPropagation();
+      e.preventDefault();
+      // TODO: Implementar pausa do playback
+      
+      const timelineRect = this.dom.timelineContainerEl.getBoundingClientRect();
+      const startX = e.clientX;
+      const durIni = f.duracaoSegundos;
+      const transConst = f.tempoTransicaoEntradaSegundos;
+      
+      const onMove = (ev: MouseEvent) => {
+        const dx = ev.clientX - startX;
+        const secPerPxContainer = totalTimelineLocal / (timelineRect.width || 1);
+        let novaDur = durIni + dx * secPerPxContainer * (this.dom.timelineContainerEl.clientWidth / this.getTotalTimelinePx());
+        novaDur = Math.max(0.1, novaDur);
+        bloco.title = `Duração: ${novaDur.toFixed(2)}s`;
+      };
+      
+      const onUp = (ev: MouseEvent) => {
+        const dx = ev.clientX - startX;
+        const secPerPxContainer = totalTimelineLocal / (timelineRect.width || 1);
+        let novaDur = durIni + dx * secPerPxContainer * (this.dom.timelineContainerEl.clientWidth / this.getTotalTimelinePx());
+        novaDur = Math.max(0.1, novaDur);
+        f.duracaoSegundos = +novaDur.toFixed(2);
+        document.removeEventListener('mousemove', onMove);
+        document.removeEventListener('mouseup', onUp);
+        // TODO: Re-render tudo
+      };
+      
+      document.addEventListener('mousemove', onMove);
+      document.addEventListener('mouseup', onUp);
+    });
     
     bloco.appendChild(handleEnd);
   }

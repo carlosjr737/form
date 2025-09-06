@@ -43,7 +43,7 @@ export class SidebarRenderer {
       li.appendChild(btnDel);
 
       li.addEventListener('click', () => {
-        // TODO: Implementar mudança de formação ativa
+        // TODO: Implementar mudança de formação ativa via callback
       });
 
       li.addEventListener('dblclick', (e) => {
@@ -116,7 +116,7 @@ export class SidebarRenderer {
     const confirmar = () => {
       const novo = input.value.trim();
       if (novo && novo !== nomeAtual) {
-        // TODO: Implementar renomeação
+        // TODO: Implementar renomeação via callback
       }
       this.renderizarBarraLateral();
     };
@@ -147,7 +147,7 @@ export class SidebarRenderer {
     const confirmar = () => {
       const novo = input.value.trim();
       if (novo && novo !== atual) {
-        // TODO: Implementar renomeação de bailarino
+        // TODO: Implementar renomeação de bailarino via callback
       }
       this.renderizarPainelBailarinos();
     };
