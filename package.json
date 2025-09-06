@@ -1,18 +1,14 @@
 {
-  "name": "project",
+  "name": "coreo-app",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "devDependencies": {
-    "typescript": "^5.9.2",
-    "vite": "^7.1.4"
+    "typescript": "^5.2.2",
+    "vite": "^5.0.0"
   }
 }

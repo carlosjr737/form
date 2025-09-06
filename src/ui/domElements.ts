@@ -2,44 +2,90 @@ export class DOMElements {
   private static instance: DOMElements;
   
   // Header elements
-  public readonly tituloProjetoEl = document.getElementById('titulo-projeto') as HTMLElement;
-  public readonly btnExportar = document.getElementById('btn-exportar') as HTMLButtonElement;
-  public readonly btnImportar = document.getElementById('btn-importar') as HTMLButtonElement;
-  public readonly importFile = document.getElementById('import-file') as HTMLInputElement;
-  public readonly btnCarregarAudio = document.getElementById('btn-carregar-audio') as HTMLButtonElement;
-  public readonly audioFileInput = document.getElementById('audio-file-input') as HTMLInputElement;
-  public readonly audioInfoEl = document.getElementById('audio-info') as HTMLElement;
+  public readonly tituloProjetoEl: HTMLElement;
+  public readonly btnExportar: HTMLButtonElement;
+  public readonly btnImportar: HTMLButtonElement;
+  public readonly importFile: HTMLInputElement;
+  public readonly btnCarregarAudio: HTMLButtonElement;
+  public readonly audioFileInput: HTMLInputElement;
+  public readonly audioInfoEl: HTMLElement;
 
   // Sidebar elements
-  public readonly listaFormacoesEl = document.getElementById('lista-formacoes') as HTMLUListElement;
-  public readonly btnAddFormacao = document.getElementById('btn-add-formacao') as HTMLButtonElement;
-  public readonly listaBailarinosEl = document.getElementById('lista-bailarinos') as HTMLUListElement;
-  public readonly buscaBailarinosInput = document.getElementById('busca-bailarinos') as HTMLInputElement;
+  public readonly listaFormacoesEl: HTMLUListElement;
+  public readonly btnAddFormacao: HTMLButtonElement;
+  public readonly listaBailarinosEl: HTMLUListElement;
+  public readonly buscaBailarinosInput: HTMLInputElement;
 
   // Stage elements
-  public readonly btnAddBailarino = document.getElementById('btn-add-bailarino') as HTMLButtonElement;
-  public readonly palcoEl = document.getElementById('palco') as HTMLElement;
+  public readonly btnAddBailarino: HTMLButtonElement;
+  public readonly palcoEl: HTMLElement;
 
   // Playback controls
-  public readonly btnPlayPause = document.getElementById('btn-play-pause') as HTMLButtonElement;
-  public readonly btnAnterior = document.getElementById('btn-anterior') as HTMLButtonElement;
-  public readonly btnProxima = document.getElementById('btn-proxima') as HTMLButtonElement;
+  public readonly btnPlayPause: HTMLButtonElement;
+  public readonly btnAnterior: HTMLButtonElement;
+  public readonly btnProxima: HTMLButtonElement;
 
   // Timeline elements
-  public readonly timelineBlocosEl = document.getElementById('timeline-blocos') as HTMLElement;
-  public readonly timelineContainerEl = document.getElementById('timeline-container') as HTMLElement;
-  public readonly timeRulerEl = document.getElementById('time-ruler') as HTMLElement;
-  public readonly audioTrackEl = document.getElementById('audio-track') as HTMLElement;
-  public readonly audioCanvas = document.getElementById('audio-canvas') as HTMLCanvasElement;
-  public readonly playheadEl = document.getElementById('playhead') as HTMLElement;
+  public readonly timelineBlocosEl: HTMLElement;
+  public readonly timelineContainerEl: HTMLElement;
+  public readonly timeRulerEl: HTMLElement;
+  public readonly audioTrackEl: HTMLElement;
+  public readonly audioCanvas: HTMLCanvasElement;
+  public readonly playheadEl: HTMLElement;
 
   // Zoom controls
-  public readonly btnZoomOut = document.getElementById('zoom-out') as HTMLButtonElement;
-  public readonly btnZoomIn = document.getElementById('zoom-in') as HTMLButtonElement;
-  public readonly btnZoomReset = document.getElementById('zoom-reset') as HTMLButtonElement;
-  public readonly zoomValueEl = document.getElementById('zoom-value') as HTMLElement;
+  public readonly btnZoomOut: HTMLButtonElement;
+  public readonly btnZoomIn: HTMLButtonElement;
+  public readonly btnZoomReset: HTMLButtonElement;
+  public readonly zoomValueEl: HTMLElement;
 
-  private constructor() {}
+  private constructor() {
+    // Header elements
+    this.tituloProjetoEl = this.getElement('titulo-projeto');
+    this.btnExportar = this.getElement('btn-exportar') as HTMLButtonElement;
+    this.btnImportar = this.getElement('btn-importar') as HTMLButtonElement;
+    this.importFile = this.getElement('import-file') as HTMLInputElement;
+    this.btnCarregarAudio = this.getElement('btn-carregar-audio') as HTMLButtonElement;
+    this.audioFileInput = this.getElement('audio-file-input') as HTMLInputElement;
+    this.audioInfoEl = this.getElement('audio-info');
+
+    // Sidebar elements
+    this.listaFormacoesEl = this.getElement('lista-formacoes') as HTMLUListElement;
+    this.btnAddFormacao = this.getElement('btn-add-formacao') as HTMLButtonElement;
+    this.listaBailarinosEl = this.getElement('lista-bailarinos') as HTMLUListElement;
+    this.buscaBailarinosInput = this.getElement('busca-bailarinos') as HTMLInputElement;
+
+    // Stage elements
+    this.btnAddBailarino = this.getElement('btn-add-bailarino') as HTMLButtonElement;
+    this.palcoEl = this.getElement('palco');
+
+    // Playback controls
+    this.btnPlayPause = this.getElement('btn-play-pause') as HTMLButtonElement;
+    this.btnAnterior = this.getElement('btn-anterior') as HTMLButtonElement;
+    this.btnProxima = this.getElement('btn-proxima') as HTMLButtonElement;
+
+    // Timeline elements
+    this.timelineBlocosEl = this.getElement('timeline-blocos');
+    this.timelineContainerEl = this.getElement('timeline-container');
+    this.timeRulerEl = this.getElement('time-ruler');
+    this.audioTrackEl = this.getElement('audio-track');
+    this.audioCanvas = this.getElement('audio-canvas') as HTMLCanvasElement;
+    this.playheadEl = this.getElement('playhead');
+
+    // Zoom controls
+    this.btnZoomOut = this.getElement('zoom-out') as HTMLButtonElement;
+    this.btnZoomIn = this.getElement('zoom-in') as HTMLButtonElement;
+    this.btnZoomReset = this.getElement('zoom-reset') as HTMLButtonElement;
+    this.zoomValueEl = this.getElement('zoom-value');
+  }
+
+  private getElement(id: string): HTMLElement {
+    const element = document.getElementById(id);
+    if (!element) {
+      throw new Error(`Element with id '${id}' not found`);
+    }
+    return element;
+  }
 
   public static getInstance(): DOMElements {
     if (!DOMElements.instance) {
