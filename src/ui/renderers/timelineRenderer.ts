@@ -255,7 +255,6 @@ export class TimelineRenderer {
       const timelineRect = this.dom.timelineContainerEl.getBoundingClientRect();
       const startX = e.clientX;
       const durIni = f.duracaoSegundos;
-      const transConst = f.tempoTransicaoEntradaSegundos;
       
       const onMove = (ev: MouseEvent) => {
         const dx = ev.clientX - startX;

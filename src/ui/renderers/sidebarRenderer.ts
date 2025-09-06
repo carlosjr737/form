@@ -102,7 +102,7 @@ export class SidebarRenderer {
     });
   }
 
-  private iniciarEdicaoFormacao(li: HTMLLIElement, id: string, nomeAtual: string): void {
+  private iniciarEdicaoFormacao(li: HTMLLIElement, _id: string, nomeAtual: string): void {
     const nomeSpan = li.querySelector('.nome-formacao');
     if (!nomeSpan) return;
 
@@ -133,7 +133,7 @@ export class SidebarRenderer {
     input.addEventListener('blur', confirmar);
   }
 
-  private iniciarEdicaoBailarino(li: HTMLLIElement, id: string, atual: string): void {
+  private iniciarEdicaoBailarino(li: HTMLLIElement, _id: string, atual: string): void {
     const nomeSpan = li.querySelector('.nome');
     if (!nomeSpan) return;
 
